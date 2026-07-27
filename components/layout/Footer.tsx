@@ -48,7 +48,7 @@ export function Footer() {
 
       <div className="container-page grid grid-cols-2 gap-8 py-12 md:grid-cols-5">
         <div className="col-span-2 md:col-span-1">
-          <span className="font-heading text-xl font-semibold text-primary">Siva Prakash</span>
+          <span className="font-heading text-xl font-semibold text-primary">Kishore</span>
           <span className="mt-0.5 block text-[10px] uppercase tracking-[0.3em] text-gold">Sarees</span>
           <p className="mt-3 text-sm text-muted-foreground">
             The best saree shop in Visakhapatnam for designer, silk, bridal and wedding sarees since generations.

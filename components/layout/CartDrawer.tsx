@@ -5,7 +5,7 @@ import Link from "next/link";
 import { X, Minus, Plus, Trash2 } from "lucide-react";
 import { useStore } from "@/lib/store";
 import { Button } from "@/components/ui/Button";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice, buildOrderWhatsAppUrl } from "@/lib/utils";
 import { useEffect } from "react";
 
 export function CartDrawer() {
@@ -123,10 +123,17 @@ export function CartDrawer() {
                 <span className="text-lg font-semibold">{formatPrice(cartTotal)}</span>
               </div>
               <p className="mb-4 text-xs text-muted-foreground">
-                Shipping and taxes calculated at checkout. This is a demo store — checkout is not enabled.
+                This is a demo store — checkout sends your order details to us on WhatsApp instead of
+                online payment.
               </p>
-              <Button className="w-full" size="lg">
-                Checkout
+              <Button
+                href={buildOrderWhatsAppUrl(cart, cartTotal)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full"
+                size="lg"
+              >
+                Checkout via WhatsApp
               </Button>
             </div>
           </>

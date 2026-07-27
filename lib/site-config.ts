@@ -1,14 +1,14 @@
 export const siteConfig = {
-  name: "Siva Prakash Sarees",
-  shortName: "Siva Prakash",
+  name: "Kishore Sarees",
+  shortName: "Kishore",
   description:
     "Best saree shop in Visakhapatnam for designer, silk, bridal and wedding sarees. Visit our Vizag boutique or shop online.",
-  url: "https://www.sivaprakashsarees.com",
-  ogImage: "https://placehold.co/1200x630/7a1f35/fbf7f0.png?text=Siva+Prakash+Sarees",
+  url: "https://www.kishoresarees.com",
+  ogImage: "https://placehold.co/1200x630/7a1f35/fbf7f0.png?text=Kishore+Sarees",
   phone: "+91 98765 43210",
   phoneRaw: "919876543210",
   whatsapp: "919876543210",
-  email: "hello@sivaprakashsarees.com",
+  email: "hello@kishoresarees.com",
   address: {
     street: "12-3-45, Beach Road, Near RK Beach",
     locality: "Siripuram",
@@ -29,9 +29,9 @@ export const siteConfig = {
     },
   ],
   social: {
-    instagram: "https://www.instagram.com/sivaprakashsarees",
-    facebook: "https://www.facebook.com/sivaprakashsarees",
-    youtube: "https://www.youtube.com/@sivaprakashsarees",
+    instagram: "https://www.instagram.com/kishoresarees",
+    facebook: "https://www.facebook.com/kishoresarees",
+    youtube: "https://www.youtube.com/@kishoresarees",
   },
   currency: "INR",
   currencySymbol: "₹",

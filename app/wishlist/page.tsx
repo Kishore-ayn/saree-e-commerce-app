@@ -5,7 +5,7 @@ import { WishlistContent } from "@/components/wishlist/WishlistContent";
 
 export const metadata: Metadata = {
   title: "My Wishlist",
-  description: "View and manage your saved sarees at Siva Prakash Sarees, Visakhapatnam.",
+  description: "View and manage your saved sarees at Kishore Sarees, Visakhapatnam.",
   alternates: { canonical: "/wishlist" },
   robots: { index: false, follow: true },
 };

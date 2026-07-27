@@ -12,6 +12,7 @@ import { PincodeChecker } from "@/components/product/PincodeChecker";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { productSchema, breadcrumbSchema } from "@/lib/schema";
+import { resolveProductGalleryImages } from "@/lib/product-images";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -26,6 +27,8 @@ export async function generateMetadata({
   const product = getProductBySlug(slug);
   if (!product) return {};
 
+  const galleryImages = resolveProductGalleryImages(product);
+
   const title = `${product.name} | ${product.fabric} Saree | ${siteConfig.shortName} Visakhapatnam`;
   return {
     title,
@@ -35,7 +38,7 @@ export async function generateMetadata({
       title,
       description: product.description,
       url: `/products/${product.slug}`,
-      images: [{ url: product.images[0], width: 900, height: 1200, alt: product.name }],
+      images: [{ url: galleryImages[0], width: 900, height: 1200, alt: product.name }],
     },
   };
 }
@@ -50,16 +53,17 @@ export default async function ProductPage({
   if (!product) notFound();
 
   const related = getRelatedProducts(product);
+  const galleryImages = resolveProductGalleryImages(product);
 
   return (
     <>
-      <JsonLd data={productSchema(product)} />
+      <JsonLd data={productSchema({ ...product, images: galleryImages })} />
       <JsonLd data={breadcrumbSchema([{ label: "Collections", href: "/collections/new-arrivals" }, { label: product.name }])} />
       <Breadcrumbs items={[{ label: "Collections", href: "/collections/new-arrivals" }, { label: product.name }]} />
 
       <div className="container-page py-10 md:py-14">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-14">
-          <ProductGallery images={product.images} name={product.name} />
+          <ProductGallery images={galleryImages} name={product.name} />
 
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-gold">{product.fabric}</p>

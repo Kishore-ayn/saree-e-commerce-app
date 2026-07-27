@@ -1,0 +1,32 @@
+{
+  "wedding.webp": {
+    "alt_description": "woman wearing wedding sari looking downwards",
+    "photographer": "Dollar Gill",
+    "photographer_url": "https://unsplash.com/@dollargill?utm_source=saree-website&utm_medium=referral"
+  },
+  "haldi.webp": {
+    "alt_description": "a woman in a yellow sari holding a garland",
+    "photographer": "Arun Prakash",
+    "photographer_url": "https://unsplash.com/@its_arunprakash?utm_source=saree-website&utm_medium=referral"
+  },
+  "mehendi.webp": {
+    "alt_description": "person's right mehndi tattoo",
+    "photographer": "Vitaliy Lyubezhanin",
+    "photographer_url": "https://unsplash.com/@aperinastudios?utm_source=saree-website&utm_medium=referral"
+  },
+  "sangeet.webp": {
+    "alt_description": "a woman getting her face painted by a group of women",
+    "photographer": "Ksav Pun",
+    "photographer_url": "https://unsplash.com/@ksav_pun?utm_source=saree-website&utm_medium=referral"
+  },
+  "reception.webp": {
+    "alt_description": "woman in red and white dress standing on snow covered ground during daytime",
+    "photographer": "Sean Williams",
+    "photographer_url": "https://unsplash.com/@studiowilliams?utm_source=saree-website&utm_medium=referral"
+  },
+  "festive.webp": {
+    "alt_description": "a beautiful woman in a colorful sari",
+    "photographer": "Horitoki Ltd",
+    "photographer_url": "https://unsplash.com/@horitokibd?utm_source=saree-website&utm_medium=referral"
+  }
+}

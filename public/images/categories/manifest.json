@@ -1,0 +1,32 @@
+{
+  "soft-silk-sarees.webp": {
+    "alt_description": "a woman in a purple and gold sari",
+    "photographer": "Bella Pon Fruitsia",
+    "photographer_url": "https://unsplash.com/@bfruitsia?utm_source=saree-website&utm_medium=referral"
+  },
+  "cotton-sarees.webp": {
+    "alt_description": "woman draping the pallu of a rust and gold cotton saree",
+    "photographer": "Bulbul Ahmed",
+    "photographer_url": "https://unsplash.com/@bulbul252?utm_source=saree-website&utm_medium=referral"
+  },
+  "handloom-sarees.webp": {
+    "alt_description": "raw silk yarn threaded on a traditional wooden handloom",
+    "photographer": "Nickolas Nikolic",
+    "photographer_url": "https://unsplash.com/@nickolasnikolic?utm_source=saree-website&utm_medium=referral"
+  },
+  "georgette-sarees.webp": {
+    "alt_description": "a woman in a red sari posing for a picture",
+    "photographer": "Kolkata Models",
+    "photographer_url": "https://unsplash.com/@modelsofkolkata?utm_source=saree-website&utm_medium=referral"
+  },
+  "kanchipuram-silk.webp": {
+    "alt_description": "woman in red and blue sari dress",
+    "photographer": "Sabesh Photography LTD",
+    "photographer_url": "https://unsplash.com/@sabesh?utm_source=saree-website&utm_medium=referral"
+  },
+  "banarasi-sarees.webp": {
+    "alt_description": "A woman in a pink and blue sari",
+    "photographer": "Babi Putu",
+    "photographer_url": "https://unsplash.com/@babiputu?utm_source=saree-website&utm_medium=referral"
+  }
+}

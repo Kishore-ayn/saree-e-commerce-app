@@ -6,10 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "fetch-sarees": "node scripts/fetch-sarees.js",
+    "fetch-theme-images": "node scripts/fetch-theme-images.js"
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "dotenv": "^17.4.2",
     "lucide-react": "^1.24.0",
     "next": "16.2.10",
     "react": "19.2.4",

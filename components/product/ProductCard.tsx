@@ -9,28 +9,41 @@ import { Badge } from "@/components/ui/Badge";
 import { StarRating } from "@/components/ui/StarRating";
 import { PriceTag } from "@/components/ui/PriceTag";
 import { discountPercent, cn } from "@/lib/utils";
+import { getSareeImagesForProduct } from "@/lib/sarees-manifest";
+import { getDedicatedProductImage } from "@/lib/product-images";
 
 export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
   const toggleWishlist = useStore((s) => s.toggleWishlist);
   const isWishlisted = useStore((s) => s.wishlist.includes(product.id));
   const discount = discountPercent(product.price, product.mrp);
 
+  const dedicatedImage = getDedicatedProductImage(product.slug);
+  const manifestImages = dedicatedImage ? [] : getSareeImagesForProduct(product.id, 2);
+  const primaryImage = dedicatedImage ??
+    manifestImages[0] ?? {
+      src: product.images[0],
+      alt: `${product.name} - ${product.fabric} saree in ${product.colors[0]}, Visakhapatnam`,
+    };
+  const secondaryImage = dedicatedImage
+    ? null
+    : (manifestImages[1] ?? (product.images[1] ? { src: product.images[1], alt: `${product.name} pallu detail` } : null));
+
   return (
     <div className="group relative">
       <Link href={`/products/${product.slug}`} className="block">
         <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm bg-muted">
           <Image
-            src={product.images[0]}
-            alt={`${product.name} - ${product.fabric} saree in ${product.colors[0]}, Visakhapatnam`}
+            src={primaryImage.src}
+            alt={primaryImage.alt}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             priority={priority}
             className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
           />
-          {product.images[1] && (
+          {secondaryImage && (
             <Image
-              src={product.images[1]}
-              alt={`${product.name} pallu detail`}
+              src={secondaryImage.src}
+              alt={secondaryImage.alt}
               fill
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               className="object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"

@@ -8,9 +8,9 @@ import { breadcrumbSchema, localBusinessSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "About Us | Siva Prakash Sarees, Visakhapatnam",
+  title: "About Us | Kishore Sarees, Visakhapatnam",
   description:
-    "Learn about Siva Prakash Sarees, a trusted saree shop in Visakhapatnam offering handloom, silk and designer sarees for every occasion.",
+    "Learn about Kishore Sarees, a trusted saree shop in Visakhapatnam offering handloom, silk and designer sarees for every occasion.",
   alternates: { canonical: "/about" },
 };
 
@@ -28,11 +28,11 @@ export default function AboutPage() {
               as="h1"
               align="left"
               eyebrow="Our Story"
-              title="About Siva Prakash Sarees"
+              title="About Kishore Sarees"
             />
             <div className="space-y-4 text-sm leading-relaxed text-muted-foreground md:text-base">
               <p>
-                Siva Prakash Sarees has been a trusted name for saree shopping in Visakhapatnam,
+                Kishore Sarees has been a trusted name for saree shopping in Visakhapatnam,
                 bringing together authentic handloom weaves, premium silk sarees and everyday cotton
                 sarees under one roof near Siripuram. What began as a small family boutique has grown
                 into one of the best saree shops in Visakhapatnam, serving generations of families for
@@ -53,7 +53,7 @@ export default function AboutPage() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-muted">
             <Image
               src="https://placehold.co/800x1000/7a1f35/f3e9da.png?text=Siva+Prakash+Sarees+Boutique"
-              alt="Interior of Siva Prakash Sarees boutique in Visakhapatnam"
+              alt="Interior of Kishore Sarees boutique in Visakhapatnam"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
@@ -77,7 +77,7 @@ export default function AboutPage() {
           </div>
           <div className="relative aspect-video overflow-hidden rounded-sm bg-muted">
             <iframe
-              title="Siva Prakash Sarees location on Google Maps"
+              title="Kishore Sarees location on Google Maps"
               src={`https://www.google.com/maps?q=${siteConfig.geo.latitude},${siteConfig.geo.longitude}&z=15&output=embed`}
               className="h-full w-full border-0"
               loading="lazy"

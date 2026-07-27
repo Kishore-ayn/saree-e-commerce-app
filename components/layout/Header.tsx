@@ -1,19 +1,29 @@
 "use client";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Search, Heart, ShoppingBag, Menu, X, Phone } from "lucide-react";
 import { siteConfig, NAV_LINKS } from "@/lib/site-config";
 import { useStore } from "@/lib/store";
+import { useMounted } from "@/lib/use-mounted";
 import { MegaMenu } from "@/components/layout/MegaMenu";
-import { cn } from "@/lib/utils";
+import { MobileMegaAccordion } from "@/components/layout/MobileMegaAccordion";
+import { SearchOverlay } from "@/components/layout/SearchOverlay";
 
 export function Header() {
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const cartCount = useStore((s) => s.cartCount());
   const wishlistCount = useStore((s) => s.wishlist.length);
   const openCart = useStore((s) => s.openCart);
+
+  // The header uses backdrop-blur, which (like transform/filter) creates a new
+  // containing block for position:fixed descendants — so a fixed-position drawer
+  // nested inside it would be clipped to the header's own height instead of the
+  // viewport. Portaling to document.body sidesteps that entirely.
+  const mounted = useMounted();
 
   return (
     <header className="sticky top-0 z-30 bg-card/95 backdrop-blur">
@@ -33,7 +43,7 @@ export function Header() {
 
         <Link href="/" className="shrink-0">
           <span className="font-heading text-xl font-semibold tracking-wide text-primary md:text-2xl">
-            Siva Prakash
+            Kishore
           </span>
           <span className="block text-center text-[10px] uppercase tracking-[0.3em] text-gold">
             Sarees
@@ -54,9 +64,7 @@ export function Header() {
               {link.label}
             </Link>
           ))}
-          <div className={cn(megaOpen ? "block" : "hidden")}>
-            <MegaMenu />
-          </div>
+          {megaOpen && <MegaMenu />}
         </nav>
 
         <div className="flex items-center gap-1 md:gap-2">
@@ -69,8 +77,9 @@ export function Header() {
           </a>
           <button
             type="button"
+            onClick={() => setSearchOpen(true)}
             aria-label="Search"
-            className="hidden h-11 w-11 items-center justify-center rounded-full hover:bg-muted md:flex cursor-pointer"
+            className="flex h-11 w-11 items-center justify-center rounded-full hover:bg-muted cursor-pointer"
           >
             <Search className="h-5 w-5" />
           </button>
@@ -102,10 +111,10 @@ export function Header() {
         </div>
       </div>
 
-      {mobileOpen && (
+      {mounted && mobileOpen && createPortal(
         <div className="fixed inset-0 z-50 flex md:hidden">
           <button
-            aria-label="Close menu"
+            aria-label="Dismiss menu overlay"
             onClick={() => setMobileOpen(false)}
             className="absolute inset-0 bg-foreground/40 cursor-pointer"
           />
@@ -120,7 +129,9 @@ export function Header() {
                 <X className="h-5 w-5" />
               </button>
             </div>
-            <ul className="space-y-1">
+            <MobileMegaAccordion onNavigate={() => setMobileOpen(false)} />
+
+            <ul className="mt-2 space-y-1">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -152,8 +163,11 @@ export function Header() {
               <Phone className="h-4 w-4" /> {siteConfig.phone}
             </a>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
+
+      <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }

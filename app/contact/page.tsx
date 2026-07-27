@@ -8,9 +8,9 @@ import { breadcrumbSchema, localBusinessSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Siva Prakash Sarees, Visakhapatnam",
+  title: "Contact Us | Kishore Sarees, Visakhapatnam",
   description:
-    "Contact Siva Prakash Sarees in Visakhapatnam — visit our Siripuram store, call, WhatsApp or email us for saree styling and orders.",
+    "Contact Kishore Sarees in Visakhapatnam — visit our Siripuram store, call, WhatsApp or email us for saree styling and orders.",
   alternates: { canonical: "/contact" },
 };
 
@@ -50,7 +50,7 @@ export default function ContactPage() {
 
             <div className="relative aspect-video overflow-hidden rounded-sm bg-muted">
               <iframe
-                title="Siva Prakash Sarees location on Google Maps"
+                title="Kishore Sarees location on Google Maps"
                 src={`https://www.google.com/maps?q=${siteConfig.geo.latitude},${siteConfig.geo.longitude}&z=15&output=embed`}
                 className="h-full w-full border-0"
                 loading="lazy"
