@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { areas, getAreaBySlug } from "@/data/areas";
-import { getCollectionBySlug } from "@/data/collections";
-import { getProductsByCollection } from "@/data/products";
+import { getAreas, getAreaBySlug } from "@/lib/cms/areas";
+import { getCollectionBySlug } from "@/lib/cms/collections";
+import { getProductsByCollection } from "@/lib/cms/products";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { Accordion } from "@/components/ui/Accordion";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const areas = await getAreas();
   return areas.map((a) => ({ area: a.slug }));
 }
 
@@ -20,7 +21,7 @@ export async function generateMetadata({
   params: Promise<{ area: string }>;
 }): Promise<Metadata> {
   const { area: areaSlug } = await params;
-  const area = getAreaBySlug(areaSlug);
+  const area = await getAreaBySlug(areaSlug);
   if (!area) return {};
 
   return {
@@ -41,20 +42,21 @@ export default async function AreaPage({
   params: Promise<{ area: string }>;
 }) {
   const { area: areaSlug } = await params;
-  const area = getAreaBySlug(areaSlug);
+  const area = await getAreaBySlug(areaSlug);
   if (!area) notFound();
 
+  const productsByCollection = await Promise.all(
+    area.relevantCollections.map((slug) => getProductsByCollection(slug))
+  );
   const products = Array.from(
-    new Map(
-      area.relevantCollections
-        .flatMap((slug) => getProductsByCollection(slug))
-        .map((p) => [p.id, p])
-    ).values()
+    new Map(productsByCollection.flat().map((p) => [p.id, p])).values()
   ).slice(0, 8);
 
-  const relevantCollectionData = area.relevantCollections
-    .map((s) => getCollectionBySlug(s))
-    .filter((c): c is NonNullable<typeof c> => Boolean(c));
+  const relevantCollectionData = (
+    await Promise.all(area.relevantCollections.map((s) => getCollectionBySlug(s)))
+  ).filter((c): c is NonNullable<typeof c> => Boolean(c));
+
+  const allAreas = await getAreas();
 
   return (
     <>
@@ -105,7 +107,7 @@ export default async function AreaPage({
             We Also Serve Nearby Areas
           </h3>
           <div className="flex flex-wrap gap-2">
-            {areas
+            {allAreas
               .filter((a) => a.slug !== area.slug)
               .slice(0, 6)
               .map((a) => (
@@ -124,4 +126,4 @@ export default async function AreaPage({
   );
 }
 
-export const dynamicParams = false;
+export const dynamicParams = true;

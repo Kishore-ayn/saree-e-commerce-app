@@ -10,8 +10,15 @@ import { useMounted } from "@/lib/use-mounted";
 import { MegaMenu } from "@/components/layout/MegaMenu";
 import { MobileMegaAccordion } from "@/components/layout/MobileMegaAccordion";
 import { SearchOverlay } from "@/components/layout/SearchOverlay";
+import type { Product, Collection } from "@/lib/types";
 
-export function Header() {
+export function Header({
+  products,
+  collections,
+}: {
+  products: Product[];
+  collections: Collection[];
+}) {
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -167,7 +174,12 @@ export function Header() {
         document.body
       )}
 
-      <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <SearchOverlay
+        isOpen={searchOpen}
+        onClose={() => setSearchOpen(false)}
+        allProducts={products}
+        allCollections={collections}
+      />
     </header>
   );
 }

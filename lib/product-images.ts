@@ -38,15 +38,16 @@ export function getDedicatedProductImage(slug: string): ProductImage | null {
 }
 
 /**
- * Gallery/schema/OG image list for a product: its dedicated real photo when
- * one exists, otherwise `count` real photos from the generic saree pool
- * (same source ProductCard uses), and only falling back to the product's
- * own placeholder image set if that pool is somehow empty. This keeps
- * every product's detail-page gallery on local, always-available images
- * instead of depending on placehold.co for the ~28 products that don't
- * have a dedicated photo.
+ * Gallery/schema/OG image list for a product: CMS-managed images
+ * (product.images, set via the admin Media Library) take priority when
+ * present, since that's the whole point of the CMS's product image
+ * picker. Falls back to a dedicated real photo, then the generic saree
+ * pool (same source ProductCard uses), for products that haven't had
+ * images assigned through the CMS yet.
  */
 export function resolveProductGalleryImages(product: Product, count = 4): string[] {
+  if (product.images.length > 0) return product.images;
+
   const dedicated = getDedicatedProductImage(product.slug);
   if (dedicated) return [dedicated.src];
 

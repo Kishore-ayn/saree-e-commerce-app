@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { blogPosts } from "@/data/blog";
+import { getBlogPosts } from "@/lib/cms/blog";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -14,7 +14,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
 };
 
-export default function BlogIndexPage() {
+export default async function BlogIndexPage() {
+  const blogPosts = await getBlogPosts();
+
   return (
     <>
       <JsonLd data={breadcrumbSchema([{ label: "Blog" }])} />

@@ -1,11 +1,11 @@
 "use client";
 
 import { useStore } from "@/lib/store";
-import { products } from "@/data/products";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { Button } from "@/components/ui/Button";
+import type { Product } from "@/lib/types";
 
-export function WishlistContent() {
+export function WishlistContent({ products }: { products: Product[] }) {
   const wishlist = useStore((s) => s.wishlist);
   const items = products.filter((p) => wishlist.includes(p.id));
 

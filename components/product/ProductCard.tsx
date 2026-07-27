@@ -17,8 +17,12 @@ export function ProductCard({ product, priority = false }: { product: Product; p
   const isWishlisted = useStore((s) => s.wishlist.includes(product.id));
   const discount = discountPercent(product.price, product.mrp);
 
-  const dedicatedImage = getDedicatedProductImage(product.slug);
-  const manifestImages = dedicatedImage ? [] : getSareeImagesForProduct(product.id, 2);
+  // CMS-managed images (set via the admin Media Library) take priority
+  // when present; falls back to the curated dedicated/pool photos for
+  // products that haven't had images assigned through the CMS yet.
+  const hasCmsImages = product.images.length > 0;
+  const dedicatedImage = hasCmsImages ? null : getDedicatedProductImage(product.slug);
+  const manifestImages = hasCmsImages || dedicatedImage ? [] : getSareeImagesForProduct(product.id, 2);
   const primaryImage = dedicatedImage ??
     manifestImages[0] ?? {
       src: product.images[0],

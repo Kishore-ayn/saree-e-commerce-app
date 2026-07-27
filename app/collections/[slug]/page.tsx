@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { collections, getCollectionBySlug } from "@/data/collections";
-import { getProductsByCollection } from "@/data/products";
+import { getCollections, getCollectionBySlug } from "@/lib/cms/collections";
+import { getProductsByCollection } from "@/lib/cms/products";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CollectionExplorer } from "@/components/collection/CollectionExplorer";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const collections = await getCollections();
   return collections.map((c) => ({ slug: c.slug }));
 }
 
@@ -18,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const collection = getCollectionBySlug(slug);
+  const collection = await getCollectionBySlug(slug);
   if (!collection) return {};
 
   return {
@@ -39,13 +40,13 @@ export default async function CollectionPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const collection = getCollectionBySlug(slug);
+  const collection = await getCollectionBySlug(slug);
   if (!collection) notFound();
 
-  const products = getProductsByCollection(collection.slug);
-  const related = (collection.relatedCollections ?? [])
-    .map((s) => getCollectionBySlug(s))
-    .filter((c): c is NonNullable<typeof c> => Boolean(c));
+  const products = await getProductsByCollection(collection.slug);
+  const related = (
+    await Promise.all((collection.relatedCollections ?? []).map((s) => getCollectionBySlug(s)))
+  ).filter((c): c is NonNullable<typeof c> => Boolean(c));
 
   return (
     <>
@@ -104,4 +105,4 @@ export default async function CollectionPage({
   );
 }
 
-export const dynamicParams = false;
+export const dynamicParams = true;

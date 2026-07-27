@@ -1,9 +1,7 @@
-import { products } from "@/data/products";
-import { collections } from "@/data/collections";
 import type { Product, Collection } from "@/lib/types";
 
 /** Case-insensitive substring match across name, fabric, occasion, colour and collection tags. */
-export function searchProducts(query: string, limit = 6): Product[] {
+export function searchProducts(query: string, products: Product[], limit = 6): Product[] {
   const q = query.trim().toLowerCase();
   if (!q) return [];
 
@@ -19,7 +17,7 @@ export function searchProducts(query: string, limit = 6): Product[] {
     .slice(0, limit);
 }
 
-export function searchCollections(query: string, limit = 4): Collection[] {
+export function searchCollections(query: string, collections: Collection[], limit = 4): Collection[] {
   const q = query.trim().toLowerCase();
   if (!q) return [];
 

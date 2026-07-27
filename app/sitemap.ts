@@ -1,11 +1,18 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
-import { collections } from "@/data/collections";
-import { products } from "@/data/products";
-import { areas } from "@/data/areas";
-import { blogPosts } from "@/data/blog";
+import { getCollections } from "@/lib/cms/collections";
+import { getProducts } from "@/lib/cms/products";
+import { getAreas } from "@/lib/cms/areas";
+import { getBlogPosts } from "@/lib/cms/blog";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [collections, products, areas, blogPosts] = await Promise.all([
+    getCollections(),
+    getProducts(),
+    getAreas(),
+    getBlogPosts(),
+  ]);
+
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: siteConfig.url, changeFrequency: "daily", priority: 1 },
     { url: `${siteConfig.url}/about`, changeFrequency: "monthly", priority: 0.6 },

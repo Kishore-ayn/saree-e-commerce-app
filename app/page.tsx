@@ -5,7 +5,7 @@ import { ShopByOccasion } from "@/components/home/ShopByOccasion";
 import { ProductCarousel } from "@/components/home/ProductCarousel";
 import { TrustBadges } from "@/components/home/TrustBadges";
 import { HomeSeoContent } from "@/components/home/HomeSeoContent";
-import { products } from "@/data/products";
+import { getProducts } from "@/lib/cms/products";
 
 export const metadata: Metadata = {
   title: "Best Saree Shop in Visakhapatnam | Designer & Silk Sarees",
@@ -20,7 +20,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const products = await getProducts();
   const newArrivals = products.filter((p) => p.isNewArrival).slice(0, 8);
   const bestsellers = products.filter((p) => p.isBestseller).slice(0, 8);
 

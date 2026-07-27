@@ -11,7 +11,7 @@ import { getDedicatedProductImage } from "@/lib/product-images";
 import { getSareeImagesForProduct } from "@/lib/sarees-manifest";
 import { formatPrice } from "@/lib/utils";
 import { useMounted } from "@/lib/use-mounted";
-import type { Product } from "@/lib/types";
+import type { Product, Collection } from "@/lib/types";
 
 function resultImage(product: Product) {
   return (
@@ -23,14 +23,27 @@ function resultImage(product: Product) {
   );
 }
 
-export function SearchOverlay({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+export function SearchOverlay({
+  isOpen,
+  onClose,
+  allProducts,
+  allCollections,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  allProducts: Product[];
+  allCollections: Collection[];
+}) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const mounted = useMounted();
   const router = useRouter();
 
-  const products = useMemo(() => searchProducts(query), [query]);
-  const collectionMatches = useMemo(() => searchCollections(query), [query]);
+  const products = useMemo(() => searchProducts(query, allProducts), [query, allProducts]);
+  const collectionMatches = useMemo(
+    () => searchCollections(query, allCollections),
+    [query, allCollections]
+  );
   const hasQuery = query.trim().length > 0;
   const hasResults = products.length > 0 || collectionMatches.length > 0;
 

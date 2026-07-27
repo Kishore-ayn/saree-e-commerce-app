@@ -9,6 +9,8 @@ import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { CartDrawer } from "@/components/layout/CartDrawer";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { localBusinessSchema } from "@/lib/schema";
+import { getProducts } from "@/lib/cms/products";
+import { getCollections } from "@/lib/cms/collections";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -59,11 +61,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [products, collections] = await Promise.all([getProducts(), getCollections()]);
+
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-background text-foreground">
@@ -74,7 +78,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <Header />
+        <Header products={products} collections={collections} />
         <main id="main-content" className="flex-1 pb-16 md:pb-0">
           {children}
         </main>

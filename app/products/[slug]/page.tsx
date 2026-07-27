@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { products, getProductBySlug, getRelatedProducts } from "@/data/products";
+import { getProducts, getProductBySlug, getRelatedProducts } from "@/lib/cms/products";
 import { siteConfig } from "@/lib/site-config";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { StarRating } from "@/components/ui/StarRating";
@@ -14,7 +14,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { productSchema, breadcrumbSchema } from "@/lib/schema";
 import { resolveProductGalleryImages } from "@/lib/product-images";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const products = await getProducts();
   return products.map((p) => ({ slug: p.slug }));
 }
 
@@ -24,7 +25,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   if (!product) return {};
 
   const galleryImages = resolveProductGalleryImages(product);
@@ -49,10 +50,10 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   if (!product) notFound();
 
-  const related = getRelatedProducts(product);
+  const related = await getRelatedProducts(product);
   const galleryImages = resolveProductGalleryImages(product);
 
   return (
@@ -139,4 +140,4 @@ export default async function ProductPage({
   );
 }
 
-export const dynamicParams = false;
+export const dynamicParams = true;

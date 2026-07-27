@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Class-based dark mode, scoped to the admin shell (components/admin/AdminShell.tsx).
+   No component outside app/admin uses the `dark:` variant, so this is inert
+   for the public site. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #fbf7f0;
   --foreground: #2a1a1a;

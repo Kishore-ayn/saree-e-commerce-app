@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
-import { collections } from "@/data/collections";
-import { areas } from "@/data/areas";
+import { getCollections } from "@/lib/cms/collections";
+import { getAreas } from "@/lib/cms/areas";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
-
-const featuredCollections = collections.slice(0, 10);
 
 function InstagramIcon() {
   return (
@@ -31,7 +29,10 @@ function YoutubeIcon() {
   );
 }
 
-export function Footer() {
+export async function Footer() {
+  const [collections, areas] = await Promise.all([getCollections(), getAreas()]);
+  const featuredCollections = collections.slice(0, 10);
+
   return (
     <footer className="mt-16 border-t border-border bg-muted/50 pb-20 md:pb-0">
       <div className="border-b border-border bg-primary py-10 text-primary-foreground">

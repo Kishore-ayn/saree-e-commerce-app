@@ -2,14 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { blogPosts, getBlogPostBySlug } from "@/data/blog";
-import { getCollectionBySlug } from "@/data/collections";
+import { getBlogPosts, getBlogPostBySlug } from "@/lib/cms/blog";
+import { getCollectionBySlug } from "@/lib/cms/collections";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { BlogContent } from "@/components/blog/BlogContent";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const blogPosts = await getBlogPosts();
   return blogPosts.map((p) => ({ slug: p.slug }));
 }
 
@@ -19,7 +20,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug);
   if (!post) return {};
 
   return {
@@ -42,12 +43,12 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug);
   if (!post) notFound();
 
-  const relatedCollections = (post.relatedCollections ?? [])
-    .map((s) => getCollectionBySlug(s))
-    .filter((c): c is NonNullable<typeof c> => Boolean(c));
+  const relatedCollections = (
+    await Promise.all((post.relatedCollections ?? []).map((s) => getCollectionBySlug(s)))
+  ).filter((c): c is NonNullable<typeof c> => Boolean(c));
 
   return (
     <>
@@ -93,4 +94,4 @@ export default async function BlogPostPage({
   );
 }
 
-export const dynamicParams = false;
+export const dynamicParams = true;
