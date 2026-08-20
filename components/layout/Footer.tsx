@@ -37,7 +37,7 @@ export default function Footer() {
         <div className="space-y-3">
           <h3 className="font-heading text-lg font-medium text-foreground">
             Quick Links
-          </div>
+          </h3>
           <Link
             href="/"
             className="text-sm font-medium text-muted-foreground hover:text-primary"
@@ -74,7 +74,7 @@ export default function Footer() {
         <div className="space-y-3">
           <h3 className="font-heading text-lg font-medium text-foreground">
             Collections
-          </div>
+          </h3>
           <Link
             href="/collections/new-arrivals"
             className="text-sm font-medium text-muted-foreground hover:text-primary"
@@ -117,7 +117,7 @@ export default function Footer() {
         <div className="space-y-3">
           <h3 className="font-heading text-lg font-medium text-foreground">
             Follow Us
-          </div>
+          </h3>
           <div className="flex gap-4">
             <a
               href={siteConfig.social.instagram}
