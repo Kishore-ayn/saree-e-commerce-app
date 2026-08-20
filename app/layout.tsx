@@ -4,7 +4,7 @@ import "./globals.css";
 import { siteConfig } from "@/lib/site-config";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { localBusinessSchema } from "@/lib/schema";
-import { Header } from "@/components/layout/Header";
+import { HeaderWrapper } from "@/components/layout/HeaderWrapper";
 import { getProducts } from "@/lib/cms/products";
 import { getCollections } from "@/lib/cms/collections-public";
 
@@ -81,7 +81,7 @@ export default async function RootLayout({
     <html lang="en" className={`${playfair.variable} ${inter.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <JsonLd data={localBusinessSchema()} />
-        <Header products={products} collections={collections} />
+        <HeaderWrapper products={products} collections={collections} />
         {children}
       </body>
     </html>
