@@ -128,6 +128,15 @@ export async function getAreas(): Promise<Area[]> {
 }
 
 export async function getAreaBySlug(slug: string): Promise<Area | undefined> {
-  const areas = await getAreas();
-  return areas.find((a) => a.slug === slug);
+  const supabase = createStaticClient();
+  const { data, error } = await supabase
+    .from("areas")
+    .select("*, area_collections(collections(slug))")
+    .eq("slug", slug)
+    .eq("status", "published")
+    .single();
+
+  if (error || !data) return undefined;
+
+  return mapAreaRow(supabase, data as unknown as RawAreaRow);
 }

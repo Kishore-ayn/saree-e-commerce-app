@@ -34,19 +34,18 @@ export function AdminShell({
   }
 
   return (
-    <div className={isDark ? "dark" : ""}>
-      <div className="flex min-h-screen bg-neutral-50 dark:bg-neutral-900">
-        <Sidebar open={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
-
-        <div className="flex min-w-0 flex-1 flex-col">
-          <Topbar
-            profile={profile}
-            isDark={isDark}
-            onToggleDark={toggleDark}
-            onOpenMobileNav={() => setMobileNavOpen(true)}
-          />
-          <main className="flex-1 p-6">{children}</main>
-        </div>
+    <div className={`${isDark ? "dark" : ""} w-full min-h-screen`}>
+      {/* Fixed sidebar - positioned fixed, doesn't affect layout flow */}
+      <Sidebar open={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
+      {/* Main content area - uses padding to offset for fixed sidebar */}
+      <div className="flex flex-col h-full w-full pl-64">
+        <Topbar
+          profile={profile}
+          isDark={isDark}
+          onToggleDark={toggleDark}
+          onOpenMobileNav={() => setMobileNavOpen(true)}
+        />
+        <main className="flex-1 p-6">{children}</main>
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ const {
 } = require("./lib/unsplash");
 
 const ACCESS_KEY = getAccessKey();
-const RATE_LIMIT_MS = 1000;
+const RATE_LIMIT_MS = 20000;
 const CANDIDATES_PER_QUERY = 5;
 const IMAGES_ROOT = path.join(__dirname, "..", "public", "images");
 
@@ -44,11 +44,11 @@ const IMAGES_ROOT = path.join(__dirname, "..", "public", "images");
 // `queries` list is tried in order until one yields a free-license photo.
 const CATEGORY_ITEMS = [
   { key: "kanchipuram-silk", queries: ["kanchipuram saree", "kanjivaram silk saree", "south indian silk saree", "silk saree gold border"] },
-  { key: "banarasi-sarees", queries: ["banarasi saree", "banarasi silk", "indian silk saree zari", "bridal silk saree"] },
+  { key: "banarasi-sarees", queries: ["banarasi saree woman", "banarasi saree closeup", "banarasi silk saree", "indian banarasi saree", "banarasi saree drape"] },
   { key: "soft-silk-sarees", queries: ["silk saree drape"] },
   { key: "cotton-sarees", queries: ["cotton saree handloom"] },
   { key: "handloom-sarees", queries: ["handloom saree weaving"] },
-  { key: "georgette-sarees", queries: ["chiffon saree flowy"] },
+  { key: "georgette-sarees", queries: ["georgette saree", "georgette saree drape", "georgette saree woman", "light georgette saree", "floral georgette saree"] },
 ];
 
 const OCCASION_ITEMS = [
@@ -76,9 +76,9 @@ const PRODUCT_ITEMS = [
 ];
 
 const HERO_ITEMS = [
-  { key: "hero-fabric-texture", queries: ["saree fabric texture"] },
-  { key: "hero-silk-drape", queries: ["silk fabric draped"] },
-  { key: "hero-saree-closeup", queries: ["saree close up elegant"] },
+  { key: "hero-fabric-texture", queries: ["banarasi saree closeup"] },
+  { key: "hero-silk-drape", queries: ["woman wearing silk saree"] },
+  { key: "hero-saree-closeup", queries: ["saree closeup detail"] },
 ];
 
 const GROUPS = [

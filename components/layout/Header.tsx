@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import { Search, Heart, ShoppingBag, Menu, X, Phone } from "lucide-react";
+import { Search, Heart, ShoppingBag, Menu, X, Phone, User } from "lucide-react";
 import { siteConfig, NAV_LINKS } from "@/lib/site-config";
 import { useStore } from "@/lib/store";
 import { useMounted } from "@/lib/use-mounted";
@@ -22,6 +22,7 @@ export function Header({
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const megaTimeout = useRef<NodeJS.Timeout | null>(null);
   const cartCount = useStore((s) => s.cartCount());
   const wishlistCount = useStore((s) => s.wishlist.length);
   const openCart = useStore((s) => s.openCart);
@@ -31,6 +32,33 @@ export function Header({
   // nested inside it would be clipped to the header's own height instead of the
   // viewport. Portaling to document.body sidesteps that entirely.
   const mounted = useMounted();
+
+  const handleNavMouseEnter = () => {
+    if (megaTimeout.current) {
+      clearTimeout(megaTimeout.current);
+      megaTimeout.current = null;
+    }
+    setMegaOpen(true);
+  };
+
+  const handleNavMouseLeave = () => {
+    megaTimeout.current = setTimeout(() => {
+      setMegaOpen(false);
+    }, 300);
+  };
+
+  const handleMegaMenuMouseEnter = () => {
+    if (megaTimeout.current) {
+      clearTimeout(megaTimeout.current);
+      megaTimeout.current = null;
+    }
+  };
+
+  const handleMegaMenuMouseLeave = () => {
+    megaTimeout.current = setTimeout(() => {
+      setMegaOpen(false);
+    }, 300);
+  };
 
   return (
     <header className="sticky top-0 z-30 bg-card/95 backdrop-blur">
@@ -59,8 +87,8 @@ export function Header({
 
         <nav
           className="relative hidden flex-1 items-center justify-center gap-8 md:flex"
-          onMouseEnter={() => setMegaOpen(true)}
-          onMouseLeave={() => setMegaOpen(false)}
+          onMouseEnter={handleNavMouseEnter}
+          onMouseLeave={handleNavMouseLeave}
         >
           {NAV_LINKS.map((link) => (
             <Link
@@ -71,7 +99,7 @@ export function Header({
               {link.label}
             </Link>
           ))}
-          {megaOpen && <MegaMenu />}
+          {megaOpen && <MegaMenu onMouseEnter={handleMegaMenuMouseEnter} onMouseLeave={handleMegaMenuMouseLeave} />}
         </nav>
 
         <div className="flex items-center gap-1 md:gap-2">
@@ -82,6 +110,13 @@ export function Header({
           >
             <Phone className="h-5 w-5" />
           </a>
+          <Link
+            href="/admin/login"
+            aria-label="Admin login"
+            className="relative hidden h-11 w-11 items-center justify-center rounded-full hover:bg-muted md:flex"
+          >
+            <User className="h-5 w-5" />
+          </Link>
           <button
             type="button"
             onClick={() => setSearchOpen(true)}
@@ -96,7 +131,7 @@ export function Header({
             className="relative hidden h-11 w-11 items-center justify-center rounded-full hover:bg-muted md:flex"
           >
             <Heart className="h-5 w-5" />
-            {wishlistCount > 0 && (
+            {mounted && wishlistCount > 0 && (
               <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">
                 {wishlistCount}
               </span>
@@ -109,7 +144,7 @@ export function Header({
             className="relative flex h-11 w-11 items-center justify-center rounded-full hover:bg-muted cursor-pointer"
           >
             <ShoppingBag className="h-5 w-5" />
-            {cartCount > 0 && (
+            {mounted && cartCount > 0 && (
               <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">
                 {cartCount}
               </span>

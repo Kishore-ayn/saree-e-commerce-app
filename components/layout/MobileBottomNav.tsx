@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Home, LayoutGrid, Heart, ShoppingBag, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/lib/store";
+import { useMounted } from "@/lib/use-mounted";
 
 const items = [
   { label: "Home", href: "/", icon: Home },
@@ -19,6 +20,7 @@ export function MobileBottomNav() {
   const cartCount = useStore((s) => s.cartCount());
   const wishlistCount = useStore((s) => s.wishlist.length);
   const openCart = useStore((s) => s.openCart);
+  const mounted = useMounted();
 
   return (
     <nav
@@ -28,7 +30,13 @@ export function MobileBottomNav() {
       {items.map((item) => {
         const Icon = item.icon;
         const isActive = item.href !== "#cart" && pathname === item.href;
-        const count = item.label === "Wishlist" ? wishlistCount : item.label === "Bag" ? cartCount : 0;
+        const count = mounted
+          ? item.label === "Wishlist"
+            ? wishlistCount
+            : item.label === "Bag"
+              ? cartCount
+              : 0
+          : 0;
 
         if (item.href === "#cart") {
           return (

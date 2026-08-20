@@ -1,17 +1,17 @@
 {
-  "hero-fabric-texture.webp": {
-    "alt_description": "a close up of a pink and blue scarf",
-    "photographer": "nikhil uttam",
-    "photographer_url": "https://unsplash.com/@nikutm?utm_source=saree-website&utm_medium=referral"
-  },
-  "hero-silk-drape.webp": {
-    "alt_description": "white textile on brown wooden table",
-    "photographer": "Rue S",
-    "photographer_url": "https://unsplash.com/@rues?utm_source=saree-website&utm_medium=referral"
-  },
   "hero-saree-closeup.webp": {
     "alt_description": "woman in red and black floral shirt",
     "photographer": "Rahul Pandit",
     "photographer_url": "https://unsplash.com/@lazyartistgallery?utm_source=saree-website&utm_medium=referral"
+  },
+  "hero-fabric-texture.webp": {
+    "alt_description": "red white and blue textile",
+    "photographer": "Souravi Sinha",
+    "photographer_url": "https://unsplash.com/@douxreverie93?utm_source=saree-website&utm_medium=referral"
+  },
+  "hero-silk-drape.webp": {
+    "alt_description": "A woman in a sari walking through a park",
+    "photographer": "Mehedi Hasan",
+    "photographer_url": "https://unsplash.com/@mehedi012?utm_source=saree-website&utm_medium=referral"
   }
 }

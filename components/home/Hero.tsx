@@ -86,7 +86,7 @@ export function Hero() {
                 {slide.title}
               </p>
             )}
-            <Button href={slide.cta.href} size="lg" className="mt-6" variant="secondary">
+            <Button href={slide.cta.href} size="lg" className="mt-6" variant="primary">
               {slide.cta.label}
             </Button>
           </div>

@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { verifySession } from "@/lib/cms/auth";
 import { createClient } from "@/lib/cms/supabase/server";
+import { revalidatePublicSite } from "@/lib/cms/revalidate-public";
 
 export type ProductFormState = { error?: string } | undefined;
 
@@ -115,6 +116,7 @@ export async function createProduct(
   await syncProductJoins(supabase, data.id, parsed.collectionIds, parsed.mediaIds);
 
   revalidatePath("/admin/products");
+  revalidatePublicSite();
   redirect("/admin/products");
 }
 
@@ -137,6 +139,7 @@ export async function updateProduct(
   await syncProductJoins(supabase, id, parsed.collectionIds, parsed.mediaIds);
 
   revalidatePath("/admin/products");
+  revalidatePublicSite();
   redirect("/admin/products");
 }
 
@@ -145,4 +148,5 @@ export async function deleteProduct(id: string) {
   const supabase = await createClient();
   await supabase.from("products").delete().eq("id", id);
   revalidatePath("/admin/products");
+  revalidatePublicSite();
 }

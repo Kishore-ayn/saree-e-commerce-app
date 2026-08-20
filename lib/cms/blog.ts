@@ -138,6 +138,17 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
-  const posts = await getBlogPosts();
-  return posts.find((p) => p.slug === slug);
+  const supabase = createStaticClient();
+  const { data, error } = await supabase
+    .from("blog_posts")
+    .select(
+      "*, cover_media:cover_media_id(storage_path), blog_post_collections(collections(slug))"
+    )
+    .eq("slug", slug)
+    .eq("status", "published")
+    .single();
+
+  if (error || !data) return undefined;
+
+  return mapBlogPostRow(supabase, data as unknown as RawBlogPostRow);
 }

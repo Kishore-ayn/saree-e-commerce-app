@@ -61,24 +61,35 @@ the same values everywhere is fine for a single-project setup.
 
 ## 5. Create your first admin user
 
-Migrations create the `profiles` table but no rows — there's no admin user
-yet. Until Phase 6 (Authentication UI) adds a sign-up flow, create one
-manually:
+There's no sign-up flow by design (admins are invited, not self-registered
+— see Phase 10.4's Users & Roles admin page for inviting everyone after the
+first). Bootstrapping the very first admin takes two steps:
 
-1. Dashboard → Authentication → Users → Add User (set an email + password).
-2. Dashboard → Table Editor → `profiles` → find the row Supabase's own
-   trigger... **note:** no such trigger exists yet in this schema — you'll
-   need to insert a `profiles` row yourself with that user's `id` and
-   `role = 'admin'` until Phase 5 automates this.
+1. Dashboard → Authentication → Users → Add User (set an email + password,
+   check "Auto Confirm User"). This automatically creates a matching
+   `profiles` row with `role = 'editor'` — a trigger added in Phase 10.4
+   (`handle_new_user`) does this for every new `auth.users` row, so no
+   manual insert is needed here.
+2. Promote that row to `role = 'admin'`. **This cannot be done through the
+   Table Editor UI or a plain `UPDATE` statement** — a trigger
+   (`prevent_self_role_escalation`, Phase 3) blocks any role change that
+   isn't made by an existing admin, and there isn't one yet. Run this in
+   the Dashboard's **SQL Editor** instead, which can bypass it for one
+   statement:
+   ```sql
+   set session_replication_role = replica;
+   update profiles set role = 'admin' where id = '<the new user''s UUID, from the Users page>';
+   set session_replication_role = default;
+   ```
+   Every admin after this first one can be promoted normally through
+   Settings → Users in the admin panel itself, signed in as this account.
 
-## What this phase did NOT do
+## Status for this project
 
-- Did not create any actual Supabase project — that requires your account
-  and is the step above.
-- Did not run the migrations anywhere — no `supabase db push` has been
-  executed. The very first push against a real Postgres engine is also the
-  first full validation of the 2 files (triggers, RLS) that `pg-mem` couldn't
-  check in Phase 3 — verify `supabase db push` completes without error before
-  trusting those files.
-- Did not add a login page, sign-up flow, or session-refresh trigger for
-  `profiles` — that's Phase 5/6 (Authentication).
+Steps 1–5 above have been completed for this deployment: the Supabase
+project exists, all 16 migrations are applied (confirmed against the real
+Postgres engine — including the trigger/RLS files `pg-mem` couldn't
+validate back in Phase 3), `.env.local` is configured, and the first admin
+user is created and promoted. This section stays in the doc for the next
+clone (per the Reuse Checklist in `docs/architecture.md`), where none of
+this will be done yet.

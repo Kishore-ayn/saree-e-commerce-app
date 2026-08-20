@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
-import { getCollections } from "@/lib/cms/collections";
+import { getCollections } from "@/lib/cms/collections-public";
 import { getProducts } from "@/lib/cms/products";
-import { getAreas } from "@/lib/cms/areas";
+import { getAreas } from "@/lib/cms/areas-public";
 import { getBlogPosts } from "@/lib/cms/blog";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

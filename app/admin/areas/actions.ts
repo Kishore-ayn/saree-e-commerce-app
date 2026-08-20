@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { verifySession } from "@/lib/cms/auth";
 import { createClient } from "@/lib/cms/supabase/server";
+import { revalidatePublicSite } from "@/lib/cms/revalidate-public";
 
 export type AreaFormState = { error?: string } | undefined;
 
@@ -80,6 +81,7 @@ export async function createArea(
   await syncAreaCollections(supabase, data.id, parsed.collectionIds);
 
   revalidatePath("/admin/areas");
+  revalidatePublicSite();
   redirect("/admin/areas");
 }
 
@@ -102,6 +104,7 @@ export async function updateArea(
   await syncAreaCollections(supabase, id, parsed.collectionIds);
 
   revalidatePath("/admin/areas");
+  revalidatePublicSite();
   redirect("/admin/areas");
 }
 
@@ -110,4 +113,5 @@ export async function deleteArea(id: string) {
   const supabase = await createClient();
   await supabase.from("areas").delete().eq("id", id);
   revalidatePath("/admin/areas");
+  revalidatePublicSite();
 }

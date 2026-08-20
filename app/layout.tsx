@@ -2,15 +2,8 @@ import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/site-config";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
-import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
-import { CartDrawer } from "@/components/layout/CartDrawer";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { localBusinessSchema } from "@/lib/schema";
-import { getProducts } from "@/lib/cms/products";
-import { getCollections } from "@/lib/cms/collections";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -61,31 +54,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [products, collections] = await Promise.all([getProducts(), getCollections()]);
-
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <JsonLd data={localBusinessSchema()} />
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-sm focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
-        >
-          Skip to main content
-        </a>
-        <Header products={products} collections={collections} />
-        <main id="main-content" className="flex-1 pb-16 md:pb-0">
-          {children}
-        </main>
-        <Footer />
-        <MobileBottomNav />
-        <WhatsAppButton />
-        <CartDrawer />
+        {children}
       </body>
     </html>
   );

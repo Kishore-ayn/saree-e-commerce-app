@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { verifySession } from "@/lib/cms/auth";
 import { createClient } from "@/lib/cms/supabase/server";
+import { revalidatePublicSite } from "@/lib/cms/revalidate-public";
 
 export type TestimonialFormState = { error?: string } | undefined;
 
@@ -56,6 +57,7 @@ export async function createTestimonial(
   }
 
   revalidatePath("/admin/testimonials");
+  revalidatePublicSite();
   redirect("/admin/testimonials");
 }
 
@@ -76,6 +78,7 @@ export async function updateTestimonial(
   }
 
   revalidatePath("/admin/testimonials");
+  revalidatePublicSite();
   redirect("/admin/testimonials");
 }
 
@@ -84,4 +87,5 @@ export async function deleteTestimonial(id: string) {
   const supabase = await createClient();
   await supabase.from("testimonials").delete().eq("id", id);
   revalidatePath("/admin/testimonials");
+  revalidatePublicSite();
 }

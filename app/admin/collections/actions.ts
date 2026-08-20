@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { verifySession } from "@/lib/cms/auth";
 import { createClient } from "@/lib/cms/supabase/server";
+import { revalidatePublicSite } from "@/lib/cms/revalidate-public";
 
 export type CollectionFormState = { error?: string } | undefined;
 
@@ -94,6 +95,7 @@ export async function createCollection(
   await syncRelatedCollections(supabase, data.id, parsed.relatedCollectionIds);
 
   revalidatePath("/admin/collections");
+  revalidatePublicSite();
   redirect("/admin/collections");
 }
 
@@ -116,6 +118,7 @@ export async function updateCollection(
   await syncRelatedCollections(supabase, id, parsed.relatedCollectionIds);
 
   revalidatePath("/admin/collections");
+  revalidatePublicSite();
   redirect("/admin/collections");
 }
 
@@ -124,4 +127,5 @@ export async function deleteCollection(id: string) {
   const supabase = await createClient();
   await supabase.from("collections").delete().eq("id", id);
   revalidatePath("/admin/collections");
+  revalidatePublicSite();
 }

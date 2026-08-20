@@ -3,12 +3,14 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { megaMenuColumns, thumbnailFor, getFeaturedMenuImage } from "@/lib/mega-menu-data";
 
-export function MegaMenu() {
+export function MegaMenu({ onMouseEnter, onMouseLeave }: { onMouseEnter?: () => void; onMouseLeave?: () => void }) {
   const featuredImage = getFeaturedMenuImage();
 
   return (
     <div
       role="menu"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       className="animate-menu-in absolute left-0 top-full w-full border-t border-border bg-card shadow-lg"
     >
       <div className="container-page flex gap-10 py-8">

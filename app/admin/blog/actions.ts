@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { verifySession } from "@/lib/cms/auth";
 import { createClient } from "@/lib/cms/supabase/server";
+import { revalidatePublicSite } from "@/lib/cms/revalidate-public";
 
 export type BlogPostFormState = { error?: string } | undefined;
 
@@ -74,6 +75,7 @@ export async function createBlogPost(
   await syncBlogPostCollections(supabase, data.id, parsed.collectionIds);
 
   revalidatePath("/admin/blog");
+  revalidatePublicSite();
   redirect("/admin/blog");
 }
 
@@ -96,6 +98,7 @@ export async function updateBlogPost(
   await syncBlogPostCollections(supabase, id, parsed.collectionIds);
 
   revalidatePath("/admin/blog");
+  revalidatePublicSite();
   redirect("/admin/blog");
 }
 
@@ -104,4 +107,5 @@ export async function deleteBlogPost(id: string) {
   const supabase = await createClient();
   await supabase.from("blog_posts").delete().eq("id", id);
   revalidatePath("/admin/blog");
+  revalidatePublicSite();
 }

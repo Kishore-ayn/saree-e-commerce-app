@@ -189,22 +189,67 @@ export async function getProducts(): Promise<Product[]> {
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | undefined> {
-  const products = await getProducts();
-  return products.find((p) => p.slug === slug);
+  const supabase = createStaticClient();
+  const { data, error } = await supabase
+    .from("products")
+    .select(
+      "*, product_collections(collections(slug)), product_media(position, media(storage_path))"
+    )
+    .eq("slug", slug)
+    .eq("status", "published")
+    .single();
+
+  if (error || !data) return undefined;
+
+  return mapProductRow(supabase, data as unknown as RawProductRow);
 }
 
 export async function getProductsByCollection(collectionSlug: string): Promise<Product[]> {
-  const products = await getProducts();
-  return products.filter((p) => p.collections.includes(collectionSlug));
+  const supabase = createStaticClient();
+  const { data, error } = await supabase
+    .from("products")
+    .select(
+      "*, product_collections(collections(slug)), product_media(position, media(storage_path))"
+    )
+    .eq("status", "published")
+    .eq("product_collections.collection.slug", collectionSlug)
+    .order("created_at", { ascending: false });
+
+  if (error || !data) return [];
+  return (data as unknown as RawProductRow[]).map((row) => mapProductRow(supabase, row));
 }
 
 export async function getRelatedProducts(product: Product, limit = 4): Promise<Product[]> {
-  const products = await getProducts();
-  return products
-    .filter(
-      (p) =>
-        p.id !== product.id &&
-        (p.fabric === product.fabric || p.collections.some((c) => product.collections.includes(c)))
+  const supabase = createStaticClient();
+
+  // Build OR conditions for fabric match OR collection match
+  const collectionConditions = product.collections
+    .map((c) => `product_collections.collection.slug.eq.${c}`)
+    .join(',');
+
+  let query = supabase
+    .from("products")
+    .select(
+      "*, product_collections(collections(slug)), product_media(position, media(storage_path))"
     )
-    .slice(0, limit);
+    .eq("status", "published")
+    .neq("id", product.id)
+    .order("created_at", { ascending: false });
+
+  // Add OR condition for fabric or collections
+  if (product.fabric && collectionConditions) {
+    query = query.or(`fabric.eq.${product.fabric},${collectionConditions}`);
+  } else if (product.fabric) {
+    query = query.eq("fabric", product.fabric);
+  } else if (collectionConditions) {
+    query = query.or(collectionConditions);
+  }
+
+  // Limit the results
+  query = query.limit(limit);
+
+  const { data, error } = await query;
+
+  if (error || !data) return [];
+  return (data as unknown as RawProductRow[]).map((row) => mapProductRow(supabase, row));
 }
