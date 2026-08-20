@@ -4,6 +4,9 @@ import "./globals.css";
 import { siteConfig } from "@/lib/site-config";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { localBusinessSchema } from "@/lib/schema";
+import { Header } from "@/components/layout/Header";
+import { getProducts } from "@/lib/cms/products";
+import { getCollections } from "@/lib/cms/collections-public";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -54,15 +57,31 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Fetch products and collections for the header (search overlay etc.)
+  let products: any[] = [];
+  let collections: any[] = [];
+  try {
+    const [productsData, collectionsData] = await Promise.all([
+      getProducts(),
+      getCollections(),
+    ]);
+    products = productsData;
+    collections = collectionsData;
+  } catch (error) {
+    console.error("Failed to fetch data for Header:", error);
+    // Continue with empty arrays; Header will still render
+  }
+
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <JsonLd data={localBusinessSchema()} />
+        <Header products={products} collections={collections} />
         {children}
       </body>
     </html>
