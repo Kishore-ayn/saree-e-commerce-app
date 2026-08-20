@@ -4,7 +4,7 @@ import "./globals.css";
 import { siteConfig } from "@/lib/site-config";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { localBusinessSchema } from "@/lib/schema";
-import { HeaderWrapper } from "@/components/layout/HeaderWrapper";
+import HeaderWrapper from "@/components/layout/HeaderWrapper";
 import { getProducts } from "@/lib/cms/products";
 import { getCollections } from "@/lib/cms/collections-public";
 
