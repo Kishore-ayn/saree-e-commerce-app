@@ -5,6 +5,7 @@ import { siteConfig } from "@/lib/site-config";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { localBusinessSchema } from "@/lib/schema";
 import HeaderWrapper from "@/components/layout/HeaderWrapper";
+import FooterWrapper from "@/components/layout/FooterWrapper";
 import { getProducts } from "@/lib/cms/products";
 import { getCollections } from "@/lib/cms/collections-public";
 
@@ -83,6 +84,7 @@ export default async function RootLayout({
         <JsonLd data={localBusinessSchema()} />
         <HeaderWrapper products={products} collections={collections} />
         {children}
+        <FooterWrapper />
       </body>
     </html>
   );
