@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { listProductsAdmin } from "@/lib/cms/products";
-import { DeleteProductButton } from "@/components/admin/products/DeleteProductButton";
+import { DeleteProductButton } from "@/components/admin/products/DeleteProductButton;
+import { getCurrentProfile } from "@/lib/cms/auth";
 
 export default async function AdminProductsPage() {
-  const products = await listProductsAdmin();
+  const [products, profile] = await Promise.all([
+    listProductsAdmin(),
+    getCurrentProfile(),
+  ]);
 
   return (
     <div className="space-y-6">
@@ -50,7 +54,9 @@ export default async function AdminProductsPage() {
                   >
                     Edit
                   </Link>
-                  <DeleteProductButton id={product.id} name={product.name} />
+                  {profile.role === "admin" && (
+                    <DeleteProductButton id={product.id} name={product.name} />
+                  )}
                 </td>
               </tr>
             ))}
