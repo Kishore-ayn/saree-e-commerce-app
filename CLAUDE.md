@@ -154,7 +154,6 @@ The admin panel is located under `/app/admin` and uses Supabase for data storage
    - Create a migration in `supabase/migrations/` following the existing pattern
    - Add CRUD interfaces in `app/admin/(dashboard)/[resource]/`
    - Add data access functions in `lib/cms/[resource].ts`
-   - Export the functions from `lib/cms/index.ts` for convenience (if exists)
 2. To modify existing CMS functionality:
    - Updates to data structures require new migration files
    - Changes to admin UI go in `app/admin/(dashboard)/[resource]/`
@@ -163,6 +162,9 @@ The admin panel is located under `/app/admin` and uses Supabase for data storage
 ### Styling Components
 - Use Tailwind utility classes directly in JSX
 - For reusable components, consider creating them in a `components/` directory
+- The admin dashboard uses specialized components in `components/admin/` including:
+  - `StatCard.tsx` - A flexible card component for displaying statistics with variants, icons, and trend indicators
+  - `AdminShell.tsx`, `Sidebar.tsx`, `Topbar.tsx`, `ThemeToggle.tsx` - Layout components for the admin interface
 - Follow the existing color scheme and spacing conventions from the admin panel and public site
 - Refer to `app/globals.css` for CSS custom properties and base styles
 

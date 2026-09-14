@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { verifySession } from "@/lib/cms/auth";
+import { requireAdmin } from "@/lib/cms/users";
 import { createClient } from "@/lib/cms/supabase/server";
 import { revalidatePublicSite } from "@/lib/cms/revalidate-public";
 
@@ -144,9 +145,14 @@ export async function updateProduct(
 }
 
 export async function deleteProduct(id: string) {
-  await verifySession();
+  await requireAdmin();
   const supabase = await createClient();
-  await supabase.from("products").delete().eq("id", id);
+  const { error } = await supabase.from("products").delete().eq("id", id);
+
+  if (error) {
+    throw new Error(`Failed to delete product: ${error.message}`);
+  }
+
   revalidatePath("/admin/products");
   revalidatePublicSite();
 }
