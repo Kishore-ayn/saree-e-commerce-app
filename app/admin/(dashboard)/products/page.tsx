@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { listProductsAdmin } from "@/lib/cms/products";
-import { DeleteProductButton } from "@/components/admin/products/DeleteProductButton;
+import { DeleteProductButton } from "@/components/admin/products/DeleteProductButton";
 import { getCurrentProfile } from "@/lib/cms/auth";
 
 export default async function AdminProductsPage() {
