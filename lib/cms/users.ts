@@ -16,6 +16,14 @@ export async function requireAdmin() {
   return profile;
 }
 
+export async function requireAdminOrEditor() {
+  const profile = await getCurrentProfile();
+  if (profile.role !== "admin" && profile.role !== "editor") {
+    redirect("/admin/dashboard");
+  }
+  return profile;
+}
+
 export type UserAdminListItem = {
   id: string;
   email: string | null;
@@ -45,4 +53,25 @@ export async function listUsersAdmin(): Promise<UserAdminListItem[]> {
       lastSignInAt: user.last_sign_in_at ?? null,
     };
   });
+}
+
+// ---------------------------------------------------------------------
+// Dashboard Statistics (Phase 12) — efficient count functions for admin overview
+// ---------------------------------------------------------------------
+
+export async function countUsersByRole(role: "admin" | "editor"): Promise<number> {
+  await requireAdmin(); // Only admins can view user counts
+
+  const adminClient = createAdminClient();
+  const { data: authData, error: authError } = await adminClient.auth.admin.listUsers();
+  if (authError || !authData) return 0;
+
+  const supabase = await createClient();
+  const { data: profiles } = await supabase.from("profiles").select("id, role");
+  const profileById = new Map((profiles ?? []).map((p) => [p.id, p]));
+
+  return authData.users.filter((user) => {
+    const profile = profileById.get(user.id);
+    return (profile?.role as "admin" | "editor") === role;
+  }).length;
 }

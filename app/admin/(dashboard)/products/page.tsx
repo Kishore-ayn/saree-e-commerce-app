@@ -54,7 +54,7 @@ export default async function AdminProductsPage() {
                   >
                     Edit
                   </Link>
-                  {profile.role === "admin" && (
+                  {(profile.role === "admin" || profile.role === "editor") && (
                     <DeleteProductButton id={product.id} name={product.name} />
                   )}
                 </td>

@@ -3,8 +3,9 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { verifySession } from "@/lib/cms/auth";
-import { requireAdmin } from "@/lib/cms/users";
+import { requireAdmin, requireAdminOrEditor } from "@/lib/cms/users";
 import { createClient } from "@/lib/cms/supabase/server";
+import { createAdminClient } from "@/lib/cms/supabase/admin";
 import { revalidatePublicSite } from "@/lib/cms/revalidate-public";
 
 export type ProductFormState = { error?: string } | undefined;
@@ -145,8 +146,8 @@ export async function updateProduct(
 }
 
 export async function deleteProduct(id: string) {
-  await requireAdmin();
-  const supabase = await createClient();
+  await requireAdminOrEditor();
+  const supabase = await createAdminClient();
   const { error } = await supabase.from("products").delete().eq("id", id);
 
   if (error) {
