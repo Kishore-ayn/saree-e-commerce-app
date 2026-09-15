@@ -145,7 +145,7 @@ export async function getCollections(): Promise<Collection[]> {
   const { data, error } = await supabase
     .from("collections")
     .select(
-      "*, areas(slug), collection_related_collections(collections:related_collection_id(slug))"
+      "*, areas!related_area_id(slug), collection_related_collections!collection_id(collections!related_collection_id(slug))"
     )
     .eq("status", "published")
     .order("position", { ascending: true });

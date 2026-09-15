@@ -3,7 +3,7 @@ import type { Collection } from "@/lib/types";
 
 // ---------------------------------------------------------------------
 // Public-facing (Phase 11) — return shapes match lib/types.ts Collection
-// exactly. Published rows only.
+// exactly.
 // ---------------------------------------------------------------------
 
 export type RawCollectionRow = {
@@ -47,7 +47,7 @@ export async function getCollections(): Promise<Collection[]> {
   const { data, error } = await supabase
     .from("collections")
     .select(
-      "*, areas(slug), collection_related_collections(collections:related_collection_id(slug))"
+      "*, areas!related_area_id(slug), collection_related_collections!collection_id(collections!related_collection_id(slug))"
     )
     .eq("status", "published")
     .order("position", { ascending: true });
@@ -68,7 +68,7 @@ export async function getCollectionBySlug(slug: string): Promise<Collection | un
   const { data, error } = await supabase
     .from("collections")
     .select(
-      "*, areas(slug), collection_related_collections(collections:related_collection_id(slug))"
+      "*, areas!related_area_id(slug), collection_related_collections!collection_id(collections!related_collection_id(slug))"
     )
     .eq("slug", slug)
     .eq("status", "published")
