@@ -8,6 +8,7 @@ import HeaderWrapper from "@/components/layout/HeaderWrapper";
 import FooterWrapper from "@/components/layout/FooterWrapper";
 import { getProducts } from "@/lib/cms/products";
 import { getCollections } from "@/lib/cms/collections-public";
+import CartProvider from "@/components/layout/CartProvider";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -83,7 +84,7 @@ export default async function RootLayout({
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <JsonLd data={localBusinessSchema()} />
         <HeaderWrapper products={products} collections={collections} />
-        {children}
+        <CartProvider>{children}</CartProvider>
         <FooterWrapper />
       </body>
     </html>
