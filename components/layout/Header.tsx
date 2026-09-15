@@ -128,7 +128,7 @@ export function Header({
           <Link
             href="/wishlist"
             aria-label="Wishlist"
-            className="relative hidden h-11 w-11 items-center justify-center rounded-full hover:bg-muted md:flex"
+            className="relative flex h-11 w-11 items-center justify-center rounded-full hover:bg-muted"
           >
             <Heart className="h-5 w-5" />
             {mounted && wishlistCount > 0 && (
