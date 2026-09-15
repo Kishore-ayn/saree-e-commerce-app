@@ -54,3 +54,17 @@ export async function getFaqAdmin(id: string): Promise<FaqAdminDetail | null> {
     position: data.position,
   };
 }
+
+// ---------------------------------------------------------------------
+// Dashboard Statistics (Phase 12) — efficient count functions for admin overview
+// ---------------------------------------------------------------------
+
+export async function countFaqs(): Promise<number> {
+  const supabase = await createClient();
+  const { count, error } = await supabase
+    .from("faqs")
+    .select("*", { count: "exact", head: true });
+
+  if (error) return 0;
+  return count ?? 0;
+}

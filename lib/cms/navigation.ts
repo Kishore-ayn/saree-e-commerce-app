@@ -83,3 +83,17 @@ export async function listNavigationItemsForPicker(
   if (error || !data) return [];
   return data;
 }
+
+// ---------------------------------------------------------------------
+// Dashboard Statistics (Phase 12) — efficient count functions for admin overview
+// ---------------------------------------------------------------------
+
+export async function countNavigationItems(): Promise<number> {
+  const supabase = await createClient();
+  const { count, error } = await supabase
+    .from("navigation_items")
+    .select("*", { count: "exact", head: true });
+
+  if (error) return 0;
+  return count ?? 0;
+}

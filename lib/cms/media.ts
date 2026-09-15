@@ -36,3 +36,17 @@ export async function listMedia(): Promise<MediaItem[]> {
     createdAt: row.created_at,
   }));
 }
+
+// ---------------------------------------------------------------------
+// Dashboard Statistics (Phase 12) — efficient count functions for admin overview
+// ---------------------------------------------------------------------
+
+export async function countMedia(): Promise<number> {
+  const supabase = await createClient();
+  const { count, error } = await supabase
+    .from("media")
+    .select("*", { count: "exact", head: true });
+
+  if (error) return 0;
+  return count ?? 0;
+}

@@ -103,3 +103,17 @@ export async function getSectionAdmin(id: string): Promise<SectionAdminDetail | 
     status: data.status,
   };
 }
+
+// ---------------------------------------------------------------------
+// Dashboard Statistics (Phase 12) — efficient count functions for admin overview
+// ---------------------------------------------------------------------
+
+export async function countPages(): Promise<number> {
+  const supabase = await createClient();
+  const { count, error } = await supabase
+    .from("pages")
+    .select("*", { count: "exact", head: true });
+
+  if (error) return 0;
+  return count ?? 0;
+}

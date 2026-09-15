@@ -75,3 +75,17 @@ export async function listSubmissionsForForm(formId: string): Promise<FormSubmis
     createdAt: row.created_at,
   }));
 }
+
+// ---------------------------------------------------------------------
+// Dashboard Statistics (Phase 12) — efficient count functions for admin overview
+// ---------------------------------------------------------------------
+
+export async function countForms(): Promise<number> {
+  const supabase = await createClient();
+  const { count, error } = await supabase
+    .from("forms")
+    .select("*", { count: "exact", head: true });
+
+  if (error) return 0;
+  return count ?? 0;
+}

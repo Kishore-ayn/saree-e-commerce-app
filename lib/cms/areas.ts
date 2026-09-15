@@ -140,3 +140,28 @@ export async function getAreaBySlug(slug: string): Promise<Area | undefined> {
 
   return mapAreaRow(supabase, data as unknown as RawAreaRow);
 }
+
+// ---------------------------------------------------------------------
+// Dashboard Statistics (Phase 12) — efficient count functions for admin overview
+// ---------------------------------------------------------------------
+
+export async function countAreas(): Promise<number> {
+  const supabase = await createClient();
+  const { count, error } = await supabase
+    .from("areas")
+    .select("*", { count: "exact", head: true });
+
+  if (error) return 0;
+  return count ?? 0;
+}
+
+export async function countAreasByStatus(status: "draft" | "published"): Promise<number> {
+  const supabase = await createClient();
+  const { count, error } = await supabase
+    .from("areas")
+    .select("*", { count: "exact", head: true })
+    .eq("status", status);
+
+  if (error) return 0;
+  return count ?? 0;
+}

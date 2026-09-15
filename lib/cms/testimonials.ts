@@ -56,3 +56,17 @@ export async function getTestimonialAdmin(id: string): Promise<TestimonialAdminD
     position: data.position,
   };
 }
+
+// ---------------------------------------------------------------------
+// Dashboard Statistics (Phase 12) — efficient count functions for admin overview
+// ---------------------------------------------------------------------
+
+export async function countTestimonials(): Promise<number> {
+  const supabase = await createClient();
+  const { count, error } = await supabase
+    .from("testimonials")
+    .select("*", { count: "exact", head: true });
+
+  if (error) return 0;
+  return count ?? 0;
+}

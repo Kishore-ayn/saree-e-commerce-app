@@ -152,3 +152,28 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | undefi
 
   return mapBlogPostRow(supabase, data as unknown as RawBlogPostRow);
 }
+
+// ---------------------------------------------------------------------
+// Dashboard Statistics (Phase 12) — efficient count functions for admin overview
+// ---------------------------------------------------------------------
+
+export async function countBlogPosts(): Promise<number> {
+  const supabase = await createClient();
+  const { count, error } = await supabase
+    .from("blog_posts")
+    .select("*", { count: "exact", head: true });
+
+  if (error) return 0;
+  return count ?? 0;
+}
+
+export async function countBlogPostsByStatus(status: "draft" | "published"): Promise<number> {
+  const supabase = await createClient();
+  const { count, error } = await supabase
+    .from("blog_posts")
+    .select("*", { count: "exact", head: true })
+    .eq("status", status);
+
+  if (error) return 0;
+  return count ?? 0;
+}

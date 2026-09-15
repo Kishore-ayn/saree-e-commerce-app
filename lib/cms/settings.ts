@@ -162,3 +162,18 @@ export async function getSiteSettingsAdmin(): Promise<SiteSettingsAdmin> {
     defaultSeo: { ...EMPTY_SEO, ...(data.default_seo ?? {}) },
   };
 }
+
+// ---------------------------------------------------------------------
+// Dashboard Statistics (Phase 12) — efficient count functions for admin overview
+// ---------------------------------------------------------------------
+
+export async function hasSiteSettings(): Promise<boolean> {
+  const supabase = await createClient();
+  const { count, error } = await supabase
+    .from("site_settings")
+    .select("*", { count: "exact", head: true })
+    .eq("id", 1);
+
+  if (error) return false;
+  return (count ?? 0) > 0;
+}
