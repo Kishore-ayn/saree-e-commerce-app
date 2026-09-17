@@ -10,7 +10,7 @@ export function HomeSeoContent() {
           </h2>
           <div className="space-y-4 text-sm leading-relaxed text-muted-foreground md:text-base">
             <p>
-              Welcome to Kishore Sarees, a trusted saree shop in Visakhapatnam serving the city&apos;s
+              Welcome to {siteConfig.name}, a trusted saree shop in Visakhapatnam serving the city&apos;s
               saree lovers for weddings, festivals and everyday elegance. As one of the best saree shops
               in Visakhapatnam, our boutique near Siripuram brings together authentic handloom weaves,
               premium silk sarees and everyday cotton sarees under one roof, making us a go-to saree store

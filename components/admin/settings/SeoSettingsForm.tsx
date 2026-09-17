@@ -36,7 +36,7 @@ export function SeoSettingsForm({
 
       <div className="space-y-1">
         <label className={labelClass}>
-          Title template (use %s for the page title, e.g. &quot;%s | Kishore Sarees&quot;)
+          Title template (use %s for the page title, e.g. &quot;%s | Smiley Collections&quot;)
         </label>
         <input
           name="titleTemplate"

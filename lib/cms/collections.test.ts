@@ -5,7 +5,7 @@ function makeRow(overrides: Partial<RawCollectionRow> = {}): RawCollectionRow {
   return {
     slug: "bridal-sarees",
     name: "Bridal Sarees",
-    title: "Bridal Sarees | Kishore Sarees",
+    title: "Bridal Sarees | Smiley Collections",
     meta_description: "Shop bridal sarees.",
     h1: "Bridal Sarees",
     intro: "Our bridal collection.",

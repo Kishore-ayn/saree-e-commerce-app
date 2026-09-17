@@ -8,9 +8,9 @@ import { breadcrumbSchema, localBusinessSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "About Us | Kishore Sarees, Visakhapatnam",
+  title: "About Us | Smiley Collections, Visakhapatnam",
   description:
-    "Learn about Kishore Sarees, a trusted saree shop in Visakhapatnam offering handloom, silk and designer sarees for every occasion.",
+    "Learn about Smiley Collections, a trusted saree shop in Visakhapatnam offering handloom, silk and designer sarees for every occasion.",
   alternates: { canonical: "/about" },
 };
 
@@ -28,11 +28,11 @@ export default function AboutPage() {
               as="h1"
               align="left"
               eyebrow="Our Story"
-              title="About Kishore Sarees"
+              title="About Smiley Collections"
             />
             <div className="space-y-4 text-sm leading-relaxed text-muted-foreground md:text-base">
               <p>
-                Kishore Sarees has been a trusted name for saree shopping in Visakhapatnam,
+                Smiley Collections has been a trusted name for saree shopping in Visakhapatnam,
                 bringing together authentic handloom weaves, premium silk sarees and everyday cotton
                 sarees under one roof near Siripuram. What began as a small family boutique has grown
                 into one of the best saree shops in Visakhapatnam, serving generations of families for
@@ -53,7 +53,7 @@ export default function AboutPage() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-muted">
             <Image
               src="https://placehold.co/800x1000/7a1f35/f3e9da.png?text=Siva+Prakash+Sarees+Boutique"
-              alt="Interior of Kishore Sarees boutique in Visakhapatnam"
+              alt="Interior of Smiley Collections boutique in Visakhapatnam"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"

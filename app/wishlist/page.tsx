@@ -6,7 +6,7 @@ import { getProducts } from "@/lib/cms/products";
 
 export const metadata: Metadata = {
   title: "My Wishlist",
-  description: "View and manage your saved sarees at Kishore Sarees, Visakhapatnam.",
+  description: "View and manage your saved sarees at Smiley Collections, Visakhapatnam.",
   alternates: { canonical: "/wishlist" },
   robots: { index: false, follow: true },
 };

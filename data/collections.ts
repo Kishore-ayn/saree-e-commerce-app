@@ -4,7 +4,7 @@ export const collections: Collection[] = [
   {
     slug: "kanchipuram-silk-sarees",
     name: "Kanchipuram Silk Sarees",
-    title: "Kanchipuram Silk Sarees Visakhapatnam | Kishore Sarees",
+    title: "Kanchipuram Silk Sarees Visakhapatnam | Smiley Collections",
     metaDescription:
       "Shop authentic Kanchipuram silk sarees in Visakhapatnam. Handwoven pure silk with rich zari borders, perfect for weddings and festive occasions.",
     h1: "Kanchipuram Silk Sarees",
@@ -39,7 +39,7 @@ export const collections: Collection[] = [
   {
     slug: "pochampally-sarees",
     name: "Pochampally Sarees",
-    title: "Pochampally Ikat Sarees Visakhapatnam | Kishore Sarees",
+    title: "Pochampally Ikat Sarees Visakhapatnam | Smiley Collections",
     metaDescription:
       "Buy authentic Pochampally Ikat sarees in Visakhapatnam. Geometric handwoven patterns in silk and cotton, perfect for office and festive wear.",
     h1: "Pochampally Sarees",

@@ -1,14 +1,14 @@
 export const siteConfig = {
-  name: "Kishore Sarees",
-  shortName: "Kishore",
+  name: "Smiley Collections",
+  shortName: "Smiley",
   description:
     "Best saree shop in Visakhapatnam for designer, silk, bridal and wedding sarees. Visit our Vizag boutique or shop online.",
-  url: "https://www.kishoresarees.com",
-  ogImage: "https://placehold.co/1200x630/7a1f35/fbf7f0.png?text=Kishore+Sarees",
+  url: "https://www.smileyclollections.com",
+  ogImage: "https://placehold.co/1200x630/7a1f35/fbf7f0.png?text=Smiley+Collections",
   phone: "+91 98765 43210",
   phoneRaw: "919876543210",
   whatsapp: "919876543210",
-  email: "hello@kishoresarees.com",
+  email: "hello@smileycollections.com",
   address: {
     street: "12-3-45, Beach Road, Near RK Beach",
     locality: "Siripuram",

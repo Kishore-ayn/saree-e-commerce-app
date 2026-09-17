@@ -78,10 +78,10 @@ export function Header({
 
         <Link href="/" className="shrink-0">
           <span className="font-heading text-xl font-semibold tracking-wide text-primary md:text-2xl">
-            Kishore
+            Smiley
           </span>
           <span className="block text-center text-[10px] uppercase tracking-[0.3em] text-gold">
-            Sarees
+            Collections
           </span>
         </Link>
 

@@ -9,7 +9,7 @@ export default function Footer() {
         {/* About */}
         <div className="space-y-4">
           <h3 className="font-heading text-lg font-medium text-foreground">
-            Kishore Sarees
+            {siteConfig.name}
           </h3>
           <p className="text-sm text-muted-foreground">
             Best saree shop in Visakhapatnam for designer, silk, bridal and
@@ -148,7 +148,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-border/20 mt-12 pt-8 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Kishore Sarees. All rights reserved.
+        © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
       </div>
     </footer>
   );

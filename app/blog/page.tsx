@@ -8,7 +8,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Saree Blog | Styling Tips & Guides | Kishore Sarees",
+  title: "Saree Blog | Styling Tips & Guides | Smiley Collections",
   description:
     "Read our saree blog for styling tips, fabric guides and trends from Visakhapatnam's trusted saree boutique — bridal, silk and festive saree guides.",
   alternates: { canonical: "/blog" },

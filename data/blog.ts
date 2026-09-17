@@ -9,7 +9,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Choosing the right saree shop in Visakhapatnam can make all the difference. Here's a shopper's guide to fabric quality, variety and service.",
     date: "2026-01-12",
-    author: "Kishore Sarees Team",
+    author: "Smiley Collections Team",
     coverImage: "https://placehold.co/1200x675/7a1f35/fbf7f0.png?text=Best+Saree+Shop+in+Visakhapatnam",
     content: [
       "Visakhapatnam has grown into one of Andhra Pradesh's most vibrant shopping destinations, and with that growth has come a flood of options for saree shopping. Whether you're a bride-to-be, a festive shopper, or someone simply looking to refresh your everyday wardrobe, finding the best saree shop in Visakhapatnam requires knowing what to actually look for beyond flashy displays and discount banners.",
@@ -36,7 +36,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "From pastel silks to sustainable handloom weaves, here's what's trending in sarees this year and how to shop the look in Vizag.",
     date: "2026-02-03",
-    author: "Kishore Sarees Team",
+    author: "Smiley Collections Team",
     coverImage: "https://placehold.co/1200x675/b08d3e/2a1a1a.png?text=Latest+Saree+Trends+2026",
     content: [
       "Every year brings a fresh wave of colour palettes, weaving techniques and styling ideas to the saree world, and 2026 is no exception. As a Visakhapatnam boutique that works closely with weavers and designers, we've noticed a few clear directions shaping this year's collections — here's what's trending and how you can incorporate it into your own wardrobe.",
@@ -65,7 +65,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Choosing your wedding saree is a big decision. Here's a complete guide to fabric, colour and draping to help you decide with confidence.",
     date: "2026-02-18",
-    author: "Kishore Sarees Team",
+    author: "Smiley Collections Team",
     coverImage: "https://placehold.co/1200x675/5c1728/d4b876.png?text=Best+Wedding+Sarees+for+Brides",
     content: [
       "Choosing a wedding saree is one of the most significant decisions a bride will make in her wedding planning journey. It's not just about the fabric or the colour — it's about finding a piece that reflects tradition, personal style and the emotional weight of the occasion. Here's our styling team's complete guide to choosing the best wedding saree for your big day.",
@@ -92,7 +92,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Not sure how to tell pure silk from a blend, or which weave suits your occasion? Here's our practical guide to choosing a silk saree.",
     date: "2026-03-05",
-    author: "Kishore Sarees Team",
+    author: "Smiley Collections Team",
     coverImage: "https://placehold.co/1200x675/1f4d3d/d4b876.png?text=How+to+Choose+a+Silk+Saree",
     content: [
       "Silk sarees are an investment, and choosing the right one involves more than picking a colour you like. Understanding fabric authenticity, weave type and occasion suitability will help you make a confident, informed purchase — here's our practical guide.",
@@ -119,7 +119,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Both iconic, both silk — but Kanchipuram and Banarasi sarees differ significantly in weave, origin and feel. Here's how to tell them apart.",
     date: "2026-03-22",
-    author: "Kishore Sarees Team",
+    author: "Smiley Collections Team",
     coverImage: "https://placehold.co/1200x675/7a1f35/b08d3e.png?text=Kanchipuram+vs+Banarasi+Sarees",
     content: [
       "Kanchipuram and Banarasi sarees are two of India's most celebrated silk weaves, and both are popular choices among our Visakhapatnam customers for weddings and festive occasions. But they differ significantly in origin, technique and character — here's how to tell them apart and decide which suits your occasion.",
@@ -146,7 +146,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "From Sankranti to Diwali, here's a festival-by-festival guide to choosing the right saree for every celebration on the calendar.",
     date: "2026-04-08",
-    author: "Kishore Sarees Team",
+    author: "Smiley Collections Team",
     coverImage: "https://placehold.co/1200x675/c9932e/5c1728.png?text=Best+Sarees+for+Festivals",
     content: [
       "Festivals in Andhra Pradesh and across India each carry their own colour traditions and dressing customs. Choosing the right saree for the right festival adds to the spirit of the celebration — here's our guide to dressing for the festivals most celebrated by our Visakhapatnam customers.",
@@ -175,7 +175,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "New to saree shopping in Vizag, or just want to shop smarter? Here's our complete guide covering budget, occasion and locality tips.",
     date: "2026-04-25",
-    author: "Kishore Sarees Team",
+    author: "Smiley Collections Team",
     coverImage: "https://placehold.co/1200x675/2c4a6e/fbf7f0.png?text=Saree+Shopping+Guide+Visakhapatnam",
     content: [
       "Visakhapatnam's saree shopping scene has grown considerably over the past decade, with boutiques spread across the city from Siripuram to Madhurawada. Whether you're new to the city or simply want to shop smarter, this guide covers everything you need to know.",
@@ -204,7 +204,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "From Kanchipuram silk to designer draped styles, here are the top bridal saree collections Vizag brides are choosing this wedding season.",
     date: "2026-05-14",
-    author: "Kishore Sarees Team",
+    author: "Smiley Collections Team",
     coverImage: "https://placehold.co/1200x675/6b1a2e/d4b876.png?text=Top+Bridal+Saree+Collections+in+Vizag",
     content: [
       "Wedding season in Visakhapatnam brings a fresh wave of bridal saree shopping, and this year's collections reflect a beautiful mix of timeless tradition and modern styling. Here's a look at the top bridal saree collections Vizag brides are gravitating toward this season.",
