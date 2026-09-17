@@ -25,7 +25,17 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/collections/sarees-under-1000)",
       "Bash(jobs)",
       "Bash(netstat -tlnp)",
-      "Bash(curl -s -H \"apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZuaGl4aWR5ZG5qbXNtdnJiaHdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNzc4MzYsImV4cCI6MjEwMDc1MzgzNn0.J0YJVZa0_dX8yyWD6W5xYkr9XEtqCp-UbNRO6c1sBFk\" \"https://vnhixidydnjmsmvrbhwa.supabase.co/rest/v1/products?select=slug,name,price,product_collections!product_collections_product_id_fkey\\(collections\\(slug\\)\\)&status=eq.published&product_collections.collection.slug=eq.new-arrivals\")"
+      "Bash(curl -s -H \"apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZuaGl4aWR5ZG5qbXNtdnJiaHdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNzc4MzYsImV4cCI6MjEwMDc1MzgzNn0.J0YJVZa0_dX8yyWD6W5xYkr9XEtqCp-UbNRO6c1sBFk\" \"https://vnhixidydnjmsmvrbhwa.supabase.co/rest/v1/products?select=slug,name,price,product_collections!product_collections_product_id_fkey\\(collections\\(slug\\)\\)&status=eq.published&product_collections.collection.slug=eq.new-arrivals\")",
+      "Bash(taskkill /PID 7336 /F)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(taskkill /F /PID 7336)",
+      "Bash(tasklist)",
+      "Bash(powershell.exe -command \"Stop-Process -Id 7336 -Force\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(findstr \"20952\")",
+      "Bash(taskkill /PID 20952 /F)",
+      "Bash(taskkill /F /PID 20952)",
+      "PowerShell(Stop-Process -ID 20952 -Force)"
     ]
   }
 }
