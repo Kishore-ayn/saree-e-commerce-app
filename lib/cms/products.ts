@@ -212,7 +212,7 @@ export async function getProductsByCollection(collectionSlug: string): Promise<P
       "*, product_collections(collections(slug)), product_media(position, media(storage_path))"
     )
     .eq("status", "published")
-    .eq("product_collections.collection.slug", collectionSlug)
+    .eq("product_collections.collections.slug", collectionSlug)
     .order("created_at", { ascending: false });
 
   if (error || !data) return [];
