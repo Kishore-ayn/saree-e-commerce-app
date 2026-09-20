@@ -16,7 +16,7 @@ export interface OccasionNavItem extends CategoryNavItem {
 }
 
 export const CATEGORY_ITEMS: CategoryNavItem[] = [
-  { key: "kanchipuram-silk", label: "Kanchipuram Silk", href: "/collections/kanchipuram-silk-sarees" },
+  { key: "kanchipuram-silk", label: "Kanchipuram Silk", href: "/collections/kanchipuram-silk" },
   { key: "banarasi-sarees", label: "Banarasi Sarees", href: "/collections/banarasi-sarees" },
   { key: "soft-silk-sarees", label: "Soft Silk Sarees", href: "/collections/soft-silk-sarees" },
   { key: "cotton-sarees", label: "Cotton Sarees", href: "/collections/cotton-sarees" },
